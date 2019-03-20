@@ -1,7 +1,8 @@
 class Player < ActiveRecord::Base
     
-    belongs_to :user
+    belongs_to :team
 
-    validates :teamname, presence: true, uniqueness: true
+    validates :espnid, presence: true, uniqueness: true
+    validates_presence_of :first_name, :last_name, :position
 
 end

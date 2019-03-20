@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     end
 
     get "/signup" do
-      redirect to '/players' if logged_in?
+      redirect to '/teams' if logged_in?
       erb :'/users/create_user'
     end
     
@@ -14,14 +14,14 @@ class UsersController < ApplicationController
         # if params[:username] != "" && params[:email] != "" && params[:password] != ""
           @user = User.create(username: params[:username], email: params[:email], password: params[:password])
           session[:user_id] = @user.id
-          redirect to '/players'
+          redirect to '/teams'
         # else
         #   redirect to '/signup'
         # end
       end
     
       get "/login" do
-        redirect to '/players' if logged_in?
+        redirect to '/teams' if logged_in?
         erb :'/users/login'
       end
     
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         @user = User.find_by(username: params[:username])
         if @user && @user.authenticate(params[:password])
           session[:user_id] = @user.id
-          redirect to "/players"
+          redirect to "/teams"
         else
           redirect to '/signup'
         end

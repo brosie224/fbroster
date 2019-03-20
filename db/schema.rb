@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190320215712) do
+ActiveRecord::Schema.define(version: 20190320224446) do
+
+  create_table "players", force: :cascade do |t|
+    t.string  "espnid"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "position"
+    t.integer "team_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string  "name"
+    t.string  "conference"
+    t.string  "division"
+    t.integer "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
