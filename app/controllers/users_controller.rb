@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         @user = User.find_by(username: params[:username])
         if @user && @user.authenticate(params[:password])
           session[:user_id] = @user.id
-          redirect "/players"
+          redirect to "/players"
         else
           redirect to '/signup'
         end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       get "/logout" do
         redirect to '/' if !logged_in?
         session.clear
-        redirect "/login"
+        redirect to "/login"
       end
 
 end

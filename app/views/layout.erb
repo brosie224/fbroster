@@ -1,17 +1,17 @@
 <!doctype html>
 <html>
   <head>
-    <title>Football Roster Builder/title>
+    <title>Football Roster Builder</title>
   </head>
   <body>
       <nav>
         <% if logged_in? %>
-          <a href="/tweets/new"> Create Tweet </a>
+          <a href="/players/new"> Add Player </a>
           <a href="/logout"> Log Out </a>
           <p>Welcome, <%=current_user.username %></p>
         <% else %>
-          <a href="/signup">Sign Up</a>
-          <a href="/login"> Sign In </a>
+          <a href="/signup">Sign Up</a>&nbsp
+          <a href="/login"> Log In </a>
         <%end %>
      </nav>
 
