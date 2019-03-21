@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
 
         @team = Team.new(name: params[:name], conference: params[:conference], division: params[:division])
             if @team.save
-                User.find(session[:user_id]).teams << @team
+                User.find_by(id: session[:user_id]).teams << @team
                 redirect to "/teams/#{@team.id}"
             else
                 redirect to '/teams/new'
@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
 
     get '/teams/:id' do
         redirect to '/login' if !logged_in?
-        @team = Team.find(params[:id])
+        @team = Team.find_by(id: params[:id])
         erb :'/teams/show_team'
     end
 
@@ -43,7 +43,7 @@ class TeamsController < ApplicationController
     patch '/teams/:id' do
         redirect to '/login' if !logged_in?
 
-        @team = Team.find(params[:id])
+        @team = Team.find_by(id: params[:id])
 
         if @team && @team.user_id == current_user.id
             @team.update(name: params[:name], conference: params[:conference], division: params[:division])

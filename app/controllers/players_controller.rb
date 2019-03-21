@@ -14,7 +14,7 @@ class PlayersController < ApplicationController
     post '/players' do
         redirect to '/login' if !logged_in?
 
-        @player = Player.new(name: params[:name], conference: params[:conference], division: params[:division])
+        @player = Player.new(first_name: params[:first_name], last_name: params[:last_name], position: params[:position], espnid: params[:espnid])
             if @player.save
                 User.find(session[:user_id]).players << @player
                 redirect to "/players/#{@player.id}"
