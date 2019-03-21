@@ -2,11 +2,19 @@
 <form action="/players" method="POST">
     <input type="text" name="first_name" placeholder="First Name" required>
     <input type="text" name="last_name" placeholder="Last Name" required><br><br>
-    <input type="text" name="position" placeholder="Position" required><br><br>
 
-    <select name='team_id' type='text'>
-        <option value="">--Please choose an team--</option>
-        <% @teams.each() do |team| %>
+    <select name="position" type="text" required>
+        <option value="">--Position--</option>
+        <option value="QB">QB</option>
+        <option value="RB">RB</option>
+        <option value="WR">WR</option>
+        <option value="TE">TE</option>
+        <option value="K">K</option>
+    </select><br><br>
+
+    <select name='team_id' type='text' required>
+        <option value="">--Please choose fantasy team--</option>
+        <% @teams.each do |team| %>
             <option value="<%= team.id %>"><%= team.name %></option>
         <% end %>
     </select><br><br>

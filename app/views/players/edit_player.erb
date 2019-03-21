@@ -3,8 +3,23 @@
     <input type="hidden" name="_method" value="patch">
     <label>First Name: <input type="text" name="first_name" value="<%= @player.first_name %>" required></label>
     <label>Last Name: <input type="text" name="last_name" value="<%= @player.last_name %>" required></label><br><br>
-    <label>Position: <input type="text" name="position" value="<%= @player.position %>" required></label><br><br>
-    <label>Team: <input type="text" name="team_name" value="<%= @player.team.name %>" required></label><br><br>
+
+    <label>Position: </label>
+    <select name="position" type="text" required>
+        <option value="QB" <%= "selected" if @player.position == "QB" %>>QB</option>
+        <option value="RB" <%= "selected" if @player.position == "RB" %>>RB</option>
+        <option value="WR" <%= "selected" if @player.position == "WR" %>>WR</option>
+        <option value="TE" <%= "selected" if @player.position == "TE" %>>TE</option>
+        <option value="K" <%= "selected" if @player.position == "K" %>>K</option>
+    </select><br><br>
+
+    <label>Fantasy Team: </label>
+    <select name='team_id' type='text' required>
+        <% @teams.each do |team| %>
+            <option value="<%= team.id %>"<%= "selected" if @player.team_id == team.id %>><%= team.name %></option>
+        <% end %>
+    </select><br><br>
+
     <label>ESPN ID: <input type="text" name="espnid" value="<%= @player.espnid %>" required></label><br><br>
     <input id="submit" type="submit" value="Update">
 </form>

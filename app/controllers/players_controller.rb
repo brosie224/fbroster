@@ -14,7 +14,7 @@ class PlayersController < ApplicationController
 
     post '/players' do
         redirect to '/login' if !logged_in?
-binding.pry
+
         @player = Player.new(first_name: params[:first_name], last_name: params[:last_name], position: params[:position], espnid: params[:espnid], team_id: params[:team_id])
             if @player.save
                 redirect to "/players/#{@player.id}"
@@ -32,6 +32,7 @@ binding.pry
     get '/players/:id/edit' do
         redirect to '/login' if !logged_in?
 
+        @teams = Team.all
         @player = Player.find(params[:id])
         if @player && @player.team.user_id == current_user.id
             erb :'/players/edit_player'
@@ -47,11 +48,7 @@ binding.pry
         @player = Player.find_by(id: params[:id])
 
         if @player && @player.team.user_id == current_user.id
-            @player.update(first_name: params[:first_name], last_name: params[:last_name], position: params[:position], espnid: params[:espnid])
-           
-            @team = Team.find_by(name: params[:team_name])
-            @player.team_id = @team.id if @team
-            @player.save
+            @player.update(first_name: params[:first_name], last_name: params[:last_name], position: params[:position], espnid: params[:espnid], team_id: params[:team_id])
             redirect to "/players/#{@player.id}"
         else
             redirect to '/players'
