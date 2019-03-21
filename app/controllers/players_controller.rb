@@ -8,21 +8,16 @@ class PlayersController < ApplicationController
 
     get '/players/new' do
         redirect to '/login' if !logged_in?
+        @teams = Team.all
         erb :'/players/new'
     end
 
     post '/players' do
         redirect to '/login' if !logged_in?
-
-        @player = Player.new(first_name: params[:first_name], last_name: params[:last_name], position: params[:position], espnid: params[:espnid])
+binding.pry
+        @player = Player.new(first_name: params[:first_name], last_name: params[:last_name], position: params[:position], espnid: params[:espnid], team_id: params[:team_id])
             if @player.save
-                @team = Team.find_by(name: params[:team_name])
-                    if @team
-                        @team.players << @player
-                        redirect to "/teams/#{@team.id}"
-                    else
-                        redirect to '/players'
-                    end
+                redirect to "/players/#{@player.id}"
             else
                 redirect to '/players/new'
             end
