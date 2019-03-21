@@ -1,8 +1,8 @@
 <h1>Edit Team</h1>
 <form action="/teams/<%=@team.id%>" method="POST">
     <input type="hidden" name="_method" value="patch">
-    <label>Name:<input type="text" name="name" value="<%= @team.name %>"></label>
-    <label>Conference:<input type="text" name="conference" value="<%= @team.conference %>"></label>
-    <label>Division:<input type="text" name="division" value="<%= @team.division %>"></label>
+    <label>Name:<input type="text" name="name" value="<%= @team.name %>" required></label>
+    <label>Conference:<input type="text" name="conference" value="<%= @team.conference %>" required></label>
+    <label>Division:<input type="text" name="division" value="<%= @team.division %>" required></label>
     <input id="submit" type="submit" value="Update">
 </form>
