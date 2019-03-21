@@ -1,3 +1,6 @@
-<% @user.players.each do |player| %>
-   <!-- <%= tweet.content %> -->
+<% @user.teams.each do |team| %>
+   <font size="6"><a href="/teams/<%=team.id%>"><%= team.name %></a></font>
+   <br>
+   <%= "#{team.conference} #{team.division}" %>
+   <br><br>
 <% end %>
