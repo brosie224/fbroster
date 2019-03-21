@@ -1,6 +1,7 @@
+<h1>My Teams</h1>
 <% @user.teams.each do |team| %>
-   <font size="6"><a href="/teams/<%=team.id%>"><%= team.name %></a></font>
+   <font size="5"><a href="/teams/<%=team.id%>"><%= team.name %></a></font>
    <br>
-   <%= "#{team.conference} #{team.division}" %>
+   <font size="2"><%= "#{team.conference} #{team.division}" %></font>
    <br><br>
 <% end %>

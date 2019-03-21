@@ -1,10 +1,5 @@
 class UsersController < ApplicationController
 
-    get '/users/:id' do
-      @user = User.find(params[:id])
-      erb :'/users/show'
-    end
-
     get "/signup" do
       redirect to '/teams' if logged_in?
       erb :'/users/create_user'
@@ -33,6 +28,11 @@ class UsersController < ApplicationController
         else
           redirect to '/signup'
         end
+      end
+
+      get '/users/:id' do
+        @user = User.find(params[:id])
+        erb :'/users/show'
       end
         
       get "/logout" do

@@ -44,10 +44,9 @@ class TeamsController < ApplicationController
         redirect to '/login' if !logged_in?
 
         @team = Team.find(params[:id])
-        redirect to "/teams/#{@team.id}/edit" if params[:content] == ""
 
         if @team && @team.user_id == current_user.id
-            @team.update(content: params[:content])
+            @team.update(name: params[:name], conference: params[:conference], division: params[:division])
             redirect to "/teams/#{@team.id}"
         else
             redirect to '/teams'
@@ -57,13 +56,10 @@ class TeamsController < ApplicationController
     delete '/teams/:id/delete' do
         redirect to '/login' if !logged_in?
 
-       @team = Team.find_by(id: params[:id])
+        @team = Team.find_by(id: params[:id])
 
-        if @team && @team.user_id == current_user.id
-            @team.destroy
-        else
-            redirect to '/teams'
-        end
+        @team.destroy if @team && @team.user_id == current_user.id
+        redirect to '/teams'
     end
     
 end
