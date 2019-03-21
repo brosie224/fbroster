@@ -16,8 +16,13 @@ class PlayersController < ApplicationController
 
         @player = Player.new(first_name: params[:first_name], last_name: params[:last_name], position: params[:position], espnid: params[:espnid])
             if @player.save
-                User.find(session[:user_id]).players << @player
-                redirect to "/players/#{@player.id}"
+                @team = Team.find_by(name: params[:team_name])
+                    if @team
+                        @team.players << @player
+                        redirect to "/teams/#{@team.id}"
+                    else
+                        redirect to '/players'
+                    end
             else
                 redirect to '/players/new'
             end
@@ -25,7 +30,7 @@ class PlayersController < ApplicationController
 
     get '/players/:id' do
         redirect to '/login' if !logged_in?
-        @player = Player.find(params[:id])
+        @player = Player.find_by(id: params[:id])
         erb :'/players/show_player'
     end
 
@@ -33,7 +38,7 @@ class PlayersController < ApplicationController
         redirect to '/login' if !logged_in?
 
         @player = Player.find(params[:id])
-        if @player && @player.user_id == current_user.id
+        if @player && @player.team.user_id == current_user.id
             erb :'/players/edit_player'
         else
             redirect to '/players'
@@ -41,12 +46,17 @@ class PlayersController < ApplicationController
     end
 
     patch '/players/:id' do
+    
         redirect to '/login' if !logged_in?
 
-        @player = Player.find(params[:id])
+        @player = Player.find_by(id: params[:id])
 
-        if @player && @player.user_id == current_user.id
-            @player.update(name: params[:name], conference: params[:conference], division: params[:division])
+        if @player && @player.team.user_id == current_user.id
+            @player.update(first_name: params[:first_name], last_name: params[:last_name], position: params[:position], espnid: params[:espnid])
+           
+            @team = Team.find_by(name: params[:team_name])
+            @player.team_id = @team.id if @team
+            @player.save
             redirect to "/players/#{@player.id}"
         else
             redirect to '/players'
@@ -58,7 +68,7 @@ class PlayersController < ApplicationController
 
         @player = Player.find_by(id: params[:id])
 
-        @player.destroy if @player && @player.user_id == current_user.id
+        @player.destroy if @player && @player.team.user_id == current_user.id
         redirect to '/players'
     end
 

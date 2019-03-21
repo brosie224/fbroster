@@ -1,0 +1,12 @@
+<font size="5"><a href="http://www.espn.com/nfl/player/_/id/<%=@player.espnid%>" target="_blank"><%= "#{@player.first_name} #{@player.last_name}" %></a></h2></font>
+<br><br>
+<font size="4"><%= "Position: #{@player.position}" %></font>
+<br><br>
+<font size="4"><%= "Team: #{@player.team.name}" %></font>
+<br><br><br>
+<a href="/players/<%= @player.id %>/edit">Edit Player</a>
+<br><br>
+<form action="/players/<%=@player.id%>/delete" method="POST">
+    <input type="hidden" name="_method" value="delete">
+    <input id="delete" type="submit" value="Delete Player">
+</form>
