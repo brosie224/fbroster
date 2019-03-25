@@ -1,4 +1,4 @@
-<font size="5"><a href="http://www.espn.com/nfl/player/_/id/<%=@player.espnid%>" target="_blank"><%= "#{@player.first_name} #{@player.last_name}" %></a></h2></font>
+<font size="5"><a href="<%= espn_page %><%= @player.espnid %>" target="_blank"><%= "#{@player.first_name} #{@player.last_name}" %></a></h2></font>
 <br><br>
 <font size="4"><%= "Position: #{@player.position}" %></font>
 <br><br>

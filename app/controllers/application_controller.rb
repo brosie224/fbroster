@@ -23,4 +23,8 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  def espn_page
+    "http://www.espn.com/nfl/player/_/id/"
+  end
+
 end

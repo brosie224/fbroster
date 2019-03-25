@@ -1,7 +1,7 @@
 <h1>All Players</h1>
 <% @players.each do |player| %>
    <font size="4"><%= player.position %>
-   <a href="http://www.espn.com/nfl/player/_/id/<%=player.espnid%>" target="blank"><%= "#{player.first_name} #{player.last_name}"%></a>&#44;</font>
+   <a href="<%= espn_page %><%= player.espnid %>" target="blank"><%= "#{player.first_name} #{player.last_name}"%></a>&#44;</font>
    <%= player.team.name %>&nbsp; &nbsp;
    <font size="2"><a href="/players/<%= player.id %>/edit">Edit Player</a></font>
    <br>
